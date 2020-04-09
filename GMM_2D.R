@@ -44,7 +44,7 @@ update_pi<-function(w){
     pi=colSums(w)/sum(w)
     return(pi)
 }
-###### ? some thing wrong here
+###### 
 logLH<-function(x,pi,mu,var){
     n_points=nrow(x)
     n_clusters=length(pi)
@@ -52,7 +52,7 @@ logLH<-function(x,pi,mu,var){
     for(i in 1:n_clusters){
         pdfs[,i]<-dmvnorm(x,mean=mu[i,],sigma=diag(var[i,]))*pi[i]
     }
-    return(mean(log(colSums(pdfs))))
+    return(mean(log(rowSums(pdfs))))
 }
 ####
 update_mu<-function(x,w){
