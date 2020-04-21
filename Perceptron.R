@@ -54,5 +54,16 @@ pts <- Random.Unit(1000, 2, THRESHOLD)
 mat <- pts[,c(3,4,1)]
 w <- train(mat)
 Plot2D(pts, -w[1]/w[3], -w[2]/ w[3])
-
+####3D
+Plot3D <- function(points, a, b, c, d) {
+  plot3d(points[, 3:5], xlab = "X", ylab = "Y", zlab = "Z",
+         pch = ifelse(points[, 1] == 1, 2, 8),
+         col = ifelse(points[, 1] == 1, "blue", "red"))
+  planes3d(a, b, c, d)
+}
+THRESHOLD <- 1.5
+pts <- Random.Unit(1000, 3, THRESHOLD)
+mat <- pts[],c(3,4,5,1)
+w <- train(pts)
+Plot3D(pts, w[4], w[3], w[2], w[1])
 
