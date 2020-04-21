@@ -30,7 +30,7 @@ train <- function(mat,lr = 0.5){
         }
     }
     cat("final w0",w0," final b0",b0,"\n")
-    return(c(w0,b0))
+    return(c(b0,w0))
 }
 
 ### another example use other guy's data to prove my code
@@ -66,4 +66,16 @@ pts <- Random.Unit(1000, 3, THRESHOLD)
 mat <- pts[],c(3,4,5,1)
 w <- train(pts)
 Plot3D(pts, w[4], w[3], w[2], w[1])
+##### another example
+irissub <- iris[1:100, c(1, 3, 5)]
+names(irissub) <- c("sepal", "petal", "species")
+head(irissub)
+irissub[, 4] <- 1
+irissub[irissub[, 3] == "setosa", 4] <- -1
 
+x <- irissub[, c(1, 2)]
+y <- irissub[, 4]
+mat <- as.matrix(cbind(x,y))
+w <-train(mat)
+plot(x[,1],x[,2],col=y+2))
+abline(-w[1]/w[3],-w[2]/w[3],col="red")
