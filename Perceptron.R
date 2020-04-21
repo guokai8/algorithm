@@ -25,9 +25,34 @@ train <- function(mat,lr = 0.5){
                 break
             }else{
                 res <- c(res,f)
-                cat("result = ",res,"\n")
+                #cat("result = ",res,"\n")
             }
         }
     }
     cat("final w0",w0," final b0",b0,"\n")
+    return(c(w0,b0))
 }
+
+### another example use other guy's data to prove my code
+##generate data ## https://github.com/billderose-zz/perceptron/blob/master/perceptron.R
+Random.Unit <-function(n, dim, threshold) {
+  points <- runif(n * dim)
+  points <- matrix(points, ncol = dim)
+  label <- ifelse(apply(points, 1, sum) < threshold, -1, 1)
+  return(cbind(label, x0 = rep(1, n), points))
+}
+### generate figures
+Plot2D <- function(points, a, b) {
+  plot(points[, 3:4], xlab = "X", ylab = "Y",
+       pch = ifelse(points[, 1] == 1, 2, 8),
+       col = ifelse(points[, 1] == 1, "blue", "red"))
+  abline(a, b)
+}
+####
+THRESHOLD <- 0.75
+pts <- Random.Unit(1000, 2, THRESHOLD)
+mat <- pts[,c(3,4,1)]
+w <- train(mat)
+Plot2D(pts, -w[1]/w[3], -w[2]/ w[3])
+
+
