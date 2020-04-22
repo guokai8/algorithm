@@ -77,7 +77,7 @@ x <- irissub[, c(1, 2)]
 y <- irissub[, 4]
 mat <- as.matrix(cbind(x,y))
 w <-train(mat)
-plot(x[,1],x[,2],col=y+2))
+plot(x[,1],x[,2],col=y+2)
 abline(-w[1]/w[3],-w[2]/w[3],col="red")
 ######another way
 train <- function(mat, eta, niter) {
