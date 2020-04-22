@@ -1,4 +1,9 @@
 ## scale data and split to train and test data
+#1、计算已知类别数据集中的点与当前点（未知分类）的距离。
+#2、按照距离递增排序
+#3、选取与当前距离最小的k个点
+#4、确定前k个点所在类别的出现频率
+#5、返回前k个点出现频率最高的类别作为当前点的预测类别
 train <- function(train,test,k=6,prob=FALSE,method="euclidean"){
     train <- as.data.frame(train)
     test <- as.data.frame(test)
