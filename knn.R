@@ -14,7 +14,7 @@ knn <- function(train,test,k=6){
         dis <-dis[order(dis$distance),]
         freq <- as.data.frame(table(dis[1:k,"known"]))
         freq <- freq[order(-freq$Freq),]
-        test[i,nc+1]<-freq[1,1]
+        test[i,nc+1]<-as.character(freq[1,1])
     }
     colnames(test)[nc+1]<-"predict"
     test
