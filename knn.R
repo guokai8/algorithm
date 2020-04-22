@@ -1,5 +1,5 @@
 ## scale data and split to train and test data
-knn <- function(train,test,k=6,prob=FALSE,method="euclidean"){
+train <- function(train,test,k=6,prob=FALSE,method="euclidean"){
     train <- as.data.frame(train)
     test <- as.data.frame(test)
     nc <- ncol(train)
