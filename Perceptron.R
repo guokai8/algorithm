@@ -80,7 +80,7 @@ w <-train(mat)
 plot(x[,1],x[,2],col=y+2)
 abline(-w[1]/w[3],-w[2]/w[3],col="red")
 ######another way
-train <- function(mat, eta, niter) {
+train <- <- function(mat, eta, niter,thres) {
     
     # initialize weight vector
     nr <- nrow(mat)
@@ -89,12 +89,12 @@ train <- function(mat, eta, niter) {
     b0 <- 0
     errors <- rep(0, niter)
     
-    
     # loop over number of epochs niter
     for (jj in 1:niter) {
-        
+        cat("epoch is ",jj,"\n")
         # loop through training data set
-        for (i in 1:nr) {
+        index <-sample(1:nr)
+        for (i in index) {
             
             # Predict binary label using Heaviside activation 
             # function
@@ -115,10 +115,21 @@ train <- function(mat, eta, niter) {
             }
             
         }
+        x<-mat[,1:(nc-1)]
+        y<-mat[,nc]
+        yp<-x%*%w0+b0
+        yp[yp>=0]<-1
+        yp[yp<0]<- -1
+        acc <- sum(y==yp)/nr
+        cat("Acc is ",acc,"\n")
+        if(acc >thres){
+            break
+        }
     }
     
     # weight to decide between the two species 
     print(w0)
     print(b0)
-    return(errors)
+    return(list(error=errors,w=c(b0,w0)))
 }
+res <- train(mat,0.5,10,0.96)
